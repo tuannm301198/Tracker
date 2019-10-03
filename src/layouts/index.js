@@ -1,9 +1,9 @@
 import styles from './index.css';
 import React from 'react';
-import { Layout, Menu, Icon, DatePicker, Button, Select } from 'antd';
+import { Layout, Menu, Icon, DatePicker, Button, Select, Tabs } from 'antd';
 import Logo from '../assets/logo.png';
 import Link from 'umi/link';
-
+const { TabPane } = Tabs;
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Option } = Select;
@@ -33,11 +33,11 @@ class BasicLayout extends React.Component {
 
     render() {
         let className = styles.sidebar;
-        if(this.state.collapsedTask){
-            className += "sidebarclose"
+        if (this.state.collapsedTask) {
+            className = styles.sidebarclose;
         }
         return (
-            <Layout style={{ minHeight: '100vh' }}>
+            <Layout style={{ minHeight: 'calc(100vh - 64px)' }}>
                 <Header style={{ padding: 0, backgroundColor: '#000' }} >
                     <a href="#" style={{ marginLeft: '25px', float: 'left' }}>
                         <img src={Logo} alt="" style={{ width: '150px' }} />
@@ -122,27 +122,59 @@ class BasicLayout extends React.Component {
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <div style={{ position: 'relative' }}>
-                        <Button style={{ position: 'absolute', left: '100%' }} onClick={this.toggleTask}>+</Button>
-                        {/* <Sider className={styles.toggletask} style={{minHeight:'100vh'}} theme="light" collapsed={this.state.collapsedTask}>
-                            <div style={{ background: 'rgb(19, 148, 255)' }}>
-                                ABC
-                        </div>
-                            <div>
-                                XYZ
-                        </div>
-                        </Sider> */}
+                    <section style={{ position: 'relative', background: '#fff' }}>
+                        <Button style={{ position: 'absolute', left: '100%', borderRadius: '0', border: 'none', height: 40, background: '#b3b3b3' }} onClick={this.toggleTask}>
+                            {this.state.collapsedTask ? (<Icon style={{ color: '#fff' }} type="right" />) : (<Icon style={{ color: '#fff' }} type="left" />)}
+                        </Button>
                         <div className={className}>
-                            <div style={{ background: 'rgb(19, 148, 255)' }}>
-                                ABC
+                            <div style={{ background: 'rgb(39, 169, 227)', padding: 5}}>
+                                <Link style={{ color: '#fff', fontSize: 20, marginLeft:5 }} to="">Task</Link>
                             </div>
                             <div>
-                                XYZ
+                                <Tabs>
+                                    <TabPane  tab={
+                                        <><span style={{ marginRight: 2 }}>0</span>
+                                        <span>Unassigned</span></>
+                                        } key="1">
+                                        abc
+                                    </TabPane>
+                                    <TabPane tab={<><span style={{ marginRight: 2 }}>0</span>
+                                        <span>Assigned</span></>} key="2">
+                                        xyz
+                                    </TabPane>
+                                    <TabPane tab={<><span style={{ marginRight: 2 }}>0</span>
+                                        <span>Completed</span></>} key="3">
+                                        lmn
+                                    </TabPane>
+                                </Tabs>,
+                                {/* <ul style={{ display: 'flex', justifyContent: 'space-around', listStyle: 'none', padding: 0, margin: 0 }}>
+                                    <li>
+                                        <a href="#">
+                                            <span style={{ marginRight: 2 }}>0</span>
+                                            <span>Unassigned</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span style={{ marginRight: 2 }}>0</span>
+                                            <span>Assigned</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <span style={{ marginRight: 2 }}>0</span>
+                                            <span>Completed</span>
+                                        </a>
+                                    </li>
+                                </ul> */}
+                            </div>
+                            <div>
+
                             </div>
                         </div>
-                    </div>
+                    </section>
                     <Content style={{ margin: '0' }}>
-                        <div style={{ padding: 24, background: '#fff', minHeight: '100vh' }}>{this.props.children}</div>
+                        <div style={{ padding: 24, background: '#fff', minHeight: 'calc(100vh - 64px)' }}>{this.props.children}</div>
                     </Content>
                 </Layout>
             </Layout>
