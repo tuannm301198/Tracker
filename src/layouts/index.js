@@ -10,6 +10,9 @@ const { Option } = Select;
 
 
 class BasicLayout extends React.Component {
+    constructor(props){
+        super(props);
+    }
     state = {
         collapsed: false,
         collapsedTask: false
@@ -162,7 +165,7 @@ class BasicLayout extends React.Component {
                         </div>
                     </section> */}
                     <Content style={{ margin: '0' }}>
-                        <div style={{ padding: 24, background: '#fff', minHeight: 'calc(100vh - 64px)' }}>{this.props.children}</div>
+                        <div style={{ background: '#fff', minHeight: 'calc(100vh - 64px)' }}>{this.props.children}</div>
                     </Content>
                 </Layout>
             </Layout>
