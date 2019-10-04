@@ -45,13 +45,21 @@ class BasicLayout extends React.Component {
                     <div className={styles.topheader} >
                         <ul className={styles.leftheader}>
                             <li>
-                                <a className={styles.mapbutton} href="#">
-                                    <Icon type="google-plus" style={{ marginRight: 2 }} />
-                                    <span>Map</span>
-                                </a>
+                                <Button ghost style={{borderRadius:0}}>
+                                    <Link to="/">
+                                        <Icon type="google-plus" style={{ marginRight: 2 }} />
+                                        <span>Map</span>
+                                    </Link>
+                                </Button>
+                                <Button style={{borderRadius:0}}>
+                                    <Link to="/report">
+                                        <Icon type="unordered-list" style={{ marginRight: 2 }}/>
+                                        <span>List</span>
+                                    </Link>
+                                </Button>
                             </li>
                             <li>
-                                <DatePicker onChange={this.onChangeDate} placeholder="Today" style={{ width: 80 }} />
+                                <DatePicker onChange={this.onChangeDate} placeholder="Today" style={{ width: 120 }} />
                             </li>
                             <li>
                                 <Select defaultValue="allteam" style={{ width: 120 }} >
@@ -63,7 +71,7 @@ class BasicLayout extends React.Component {
                         </ul>
                         <ul className={styles.rightheader}>
                             <li>
-                                <Button>
+                                <Button ghost>
                                     Create Task
                                 </Button>
                             </li>
@@ -122,7 +130,7 @@ class BasicLayout extends React.Component {
                             </Menu.Item>
                         </Menu>
                     </Sider>
-                    <section style={{ position: 'relative', background: '#fff' }}>
+                    {/* <section style={{ position: 'relative', background: '#fff' }}>
                         <Button style={{ position: 'absolute', left: '100%', borderRadius: '0', border: 'none', height: 40, background: '#b3b3b3' }} onClick={this.toggleTask}>
                             {this.state.collapsedTask ? (<Icon style={{ color: '#fff' }} type="right" />) : (<Icon style={{ color: '#fff' }} type="left" />)}
                         </Button>
@@ -131,7 +139,7 @@ class BasicLayout extends React.Component {
                                 <Link style={{ color: '#fff', fontSize: 20, marginLeft:5 }} to="">Task</Link>
                             </div>
                             <div>
-                                <Tabs>
+                                <Tabs tabBarGutter="0" tabBarStyle={{width:"400px"}}>
                                     <TabPane  tab={
                                         <><span style={{ marginRight: 2 }}>0</span>
                                         <span>Unassigned</span></>
@@ -146,33 +154,13 @@ class BasicLayout extends React.Component {
                                         <span>Completed</span></>} key="3">
                                         lmn
                                     </TabPane>
-                                </Tabs>,
-                                {/* <ul style={{ display: 'flex', justifyContent: 'space-around', listStyle: 'none', padding: 0, margin: 0 }}>
-                                    <li>
-                                        <a href="#">
-                                            <span style={{ marginRight: 2 }}>0</span>
-                                            <span>Unassigned</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style={{ marginRight: 2 }}>0</span>
-                                            <span>Assigned</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <span style={{ marginRight: 2 }}>0</span>
-                                            <span>Completed</span>
-                                        </a>
-                                    </li>
-                                </ul> */}
+                                </Tabs>
                             </div>
                             <div>
 
                             </div>
                         </div>
-                    </section>
+                    </section> */}
                     <Content style={{ margin: '0' }}>
                         <div style={{ padding: 24, background: '#fff', minHeight: 'calc(100vh - 64px)' }}>{this.props.children}</div>
                     </Content>
