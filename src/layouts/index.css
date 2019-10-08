@@ -28,13 +28,6 @@
     margin-right: 10px;
 }
 
-.leftheader .mapbutton {
-    border: 1px solid rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    background-color: rgb(255, 255, 255);
-    padding: 5px 10px;
-    border-radius: 4px;
-}
 
 .rightheader {
     color: rgb(255, 255, 255);
@@ -45,19 +38,4 @@
 
 .rightheader li{
     margin-right: 10px;
-}
-
-.sidebar {
-    height: 100%; 
-    width: 330px;
-    z-index: 1; 
-    top: 0;
-    left: 0;
-    overflow-x: hidden;
-    transition: 0.5s;
-}
-.sidebarclose{
-    width:0;
-    transition: 0.5s;
-    overflow-x: hidden;
 }
