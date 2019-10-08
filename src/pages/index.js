@@ -30,7 +30,7 @@ const Pages = () => {
         <div style={{ background: 'rgb(39, 169, 227)', padding: 5 }}>
           <Link style={{ color: '#fff', fontSize: 20, marginLeft: 5 }} to="">Task</Link>
         </div>
-        <Tabs tabBarGutter="0" tabBarStyle={{ width: "400px" }}>
+        <Tabs tabBarGutter='0' tabBarStyle={{ width: "400px" }}>
           <TabPane tab={
             <><span style={{ marginRight: 2 }}>0</span>
               <span>Unassigned</span></>

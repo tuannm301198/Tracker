@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Layout, Menu, Icon, DatePicker, Button, Select, Modal, Collapse, Form, Input } from 'antd';
 import Link from 'umi/link';
 import styles from './index.css';
+
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Option } = Select;
@@ -12,6 +13,7 @@ const BasicLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [taskValue, setTaskValue] = useState('fieldworkforce');
 
   // const { getFieldDecorator } = props.form;
   const formItemLayout = {
@@ -26,15 +28,147 @@ const BasicLayout = (props) => {
   };
 
   const prefixSelector = (
-      <Select defaultValue="86" style={{ width: 70 }}>
-        <Option value="86">+86</Option>
-        <Option value="87">+87</Option>
-      </Select>
+    <Select defaultValue="86" style={{ width: 70 }}>
+      <Option value="86">+86</Option>
+      <Option value="87">+87</Option>
+    </Select>
   )
-  
+
+  const pickUpDelivery = (
+    <Collapse>
+      <Panel header="Pickup" key="1">
+        <Form {...formItemLayout}>
+          <Form.Item label="Name">
+            <Input placeholder="Name" />
+          </Form.Item>
+          <Form.Item label="Phone">
+            <Input addonBefore={prefixSelector}
+              placeholder="Phone" />
+          </Form.Item>
+          <Form.Item label="Email">
+            <Input placeholder="Email" />
+          </Form.Item>
+          <Form.Item label="Order ID">
+            <Input placeholder="Order ID" />
+          </Form.Item>
+          <Form.Item label="Address">
+            <Input placeholder="Address" />
+          </Form.Item>
+          <Form.Item label="RangeTime">
+            <RangePicker />
+          </Form.Item>
+          <Form.Item label="Desciption">
+            <Input placeholder="Desciption" />
+          </Form.Item>
+        </Form>
+      </Panel>
+      <Panel header="Delivery" key="2">
+        <Form {...formItemLayout}>
+          <Form.Item label="Name">
+            <Input placeholder="Name" />
+          </Form.Item>
+          <Form.Item label="Phone">
+            <Input addonBefore={prefixSelector}
+              placeholder="Phone" />
+          </Form.Item>
+          <Form.Item label="Email">
+            <Input placeholder="Email" />
+          </Form.Item>
+          <Form.Item label="Order ID">
+            <Input placeholder="Order ID" />
+          </Form.Item>
+          <Form.Item label="Address">
+            <Input placeholder="Address" />
+          </Form.Item>
+          <Form.Item label="RangeTime">
+            <RangePicker />
+          </Form.Item>
+          <Form.Item label="Desciption">
+            <Input placeholder="Desciption" />
+          </Form.Item>
+        </Form>
+      </Panel>
+    </Collapse >
+  )
+
+  const appointment = (
+    <Collapse>
+      <Panel header="Appointment" key="1">
+        <Form {...formItemLayout}>
+          <Form.Item label="Name">
+            <Input placeholder="Name" />
+          </Form.Item>
+          <Form.Item label="Phone">
+            <Input addonBefore={prefixSelector}
+              placeholder="Phone" />
+          </Form.Item>
+          <Form.Item label="Email">
+            <Input placeholder="Email" />
+          </Form.Item>
+          <Form.Item label="Order ID">
+            <Input placeholder="Order ID" />
+          </Form.Item>
+          <Form.Item label="Address">
+            <Input placeholder="Address" />
+          </Form.Item>
+          <Form.Item label="RangeTime">
+            <RangePicker />
+          </Form.Item>
+          <Form.Item label="Desciption">
+            <Input placeholder="Desciption" />
+          </Form.Item>
+        </Form>
+      </Panel>
+    </Collapse >
+  )
+
+  const fieldWorkforce = (
+    <Collapse>
+      <Panel header="Field Workforce" key="1">
+        <Form {...formItemLayout}>
+          <Form.Item label="Name">
+            <Input placeholder="Name" />
+          </Form.Item>
+          <Form.Item label="Phone">
+            <Input addonBefore={prefixSelector}
+              placeholder="Phone" />
+          </Form.Item>
+          <Form.Item label="Email">
+            <Input placeholder="Email" />
+          </Form.Item>
+          <Form.Item label="Order ID">
+            <Input placeholder="Order ID" />
+          </Form.Item>
+          <Form.Item label="Address">
+            <Input placeholder="Address" />
+          </Form.Item>
+          <Form.Item label="RangeTime">
+            <RangePicker />
+          </Form.Item>
+          <Form.Item label="Desciption">
+            <Input placeholder="Desciption" />
+          </Form.Item>
+        </Form>
+      </Panel>
+    </Collapse >
+  )
+
+  let renderSelectedTask;
+
+  switch (taskValue) {
+    case 'pickup&delivery':
+      renderSelectedTask = pickUpDelivery;
+      break;
+    case 'appointment':
+      renderSelectedTask = appointment;
+      break;
+    case 'fieldworkforce':
+      renderSelectedTask = fieldWorkforce;
+      break;
+  }
+
 
   const showModal = () => {
-    console.log(1);
     setVisible(true);
   };
 
@@ -54,6 +188,10 @@ const BasicLayout = (props) => {
     setCollapsed(!collapsed);
   };
 
+  const onSelectTaskChange = (value) => {
+    setTaskValue(value);
+    console.log(taskValue);
+  }
 
   return (
     <Layout style={{ minHeight: 'calc(100vh - 64px)' }}>
@@ -166,20 +304,20 @@ const BasicLayout = (props) => {
               </Button>,
             ]}
           >
-            <Select defaultValue="fieldworkforce" style={{ width: 240, marginBottom: 20 }} >
+            <Select defaultValue="fieldworkforce" style={{ width: 240, marginBottom: 20 }} onChange={onSelectTaskChange}>
               <Option value="pickup&delivery" > Pickup & Delivery </Option>
               <Option value="appointment" > Appointment </Option>
               <Option value="fieldworkforce" > Field Workforce </Option>
             </Select>
-            <Collapse>
+            {/* <Collapse>
               <Panel header="Field Workforce" key="1">
                 <Form {...formItemLayout}>
                   <Form.Item label="Name">
                     <Input placeholder="Name" />
                   </Form.Item>
                   <Form.Item label="Phone">
-                    <Input addonBefore={prefixSelector} 
-                                      placeholder="Phone" />
+                    <Input addonBefore={prefixSelector}
+                      placeholder="Phone" />
                   </Form.Item>
                   <Form.Item label="Email">
                     <Input placeholder="Email" />
@@ -198,7 +336,8 @@ const BasicLayout = (props) => {
                   </Form.Item>
                 </Form>
               </Panel>
-            </Collapse>
+            </Collapse> */}
+            {renderSelectedTask}
           </Modal>
           {props.children}
         </Content>
