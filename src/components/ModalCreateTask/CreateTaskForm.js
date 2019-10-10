@@ -5,6 +5,16 @@ const { RangePicker } = DatePicker;
 
 const NormalCreateForm = (props) => {
     const { getFieldDecorator } = props.form;
+    const formItemLayout = {
+        labelCol: {
+            xs: { span: 24 },
+            sm: { span: 6 },
+        },
+        wrapperCol: {
+            xs: { span: 24 },
+            sm: { span: 18 },
+        },
+    };
     const prefixSelector = getFieldDecorator('prefix', {
         initialValue: '86',
     })(
@@ -22,31 +32,27 @@ const NormalCreateForm = (props) => {
         });
     };
     return (
-        <Form onSubmit={handleSubmit}>
-            <Col span={12}>
-                <Form.Item>
-                    {getFieldDecorator('name', {
-                        rules: [{ required: true, message: 'Please input your name!' }],
-                    })(
-                        <Input
-                            prefix={<Icon type="user" />}
-                            placeholder="Name"
-                        />,
-                    )}
-                </Form.Item>
-            </Col>
-            <Col span={12}>
-                <Form.Item>
-                    {getFieldDecorator('phone number', {
-                        rules: [{ required: true, message: 'Please input your phone number' }],
-                    })(
-                        <Input addonBefore={prefixSelector}
-                            type="number"
-                            placeholder="Phone Number" />,
-                    )}
-                </Form.Item>
-            </Col>
-            <Form.Item style={{ display: 'inline-block' }}>
+        <Form {...formItemLayout} onSubmit={handleSubmit}>
+            <Form.Item label="Name">
+                {getFieldDecorator('name', {
+                    rules: [{ required: true, message: 'Please input your name!' }],
+                })(
+                    <Input
+                        prefix={<Icon type="user" />}
+                        placeholder="Name"
+                    />,
+                )}
+            </Form.Item>
+            <Form.Item label="Phone">
+                {getFieldDecorator('phone number', {
+                    rules: [{ required: true, message: 'Please input your phone number' }],
+                })(
+                    <Input addonBefore={prefixSelector}
+                        type="number"
+                        placeholder="Phone Number" />,
+                )}
+            </Form.Item>
+            <Form.Item label="Email">
                 {getFieldDecorator('email', {
                     rules: [{ required: true, message: 'Please input your Email' }],
                 })(
@@ -56,7 +62,7 @@ const NormalCreateForm = (props) => {
                     />
                 )}
             </Form.Item>
-            <Form.Item style={{ display: 'inline-block' }}>
+            <Form.Item label="Order ID">
                 {getFieldDecorator('orderid', {
                     rules: [{ required: true, message: 'Please input your Order ID' }],
                 })(
@@ -66,7 +72,7 @@ const NormalCreateForm = (props) => {
                     />
                 )}
             </Form.Item>
-            <Form.Item>
+            <Form.Item label="Address">
                 {getFieldDecorator('address', {
                     rules: [{ required: true, message: 'Please input your Address' }],
                 })(
@@ -76,14 +82,14 @@ const NormalCreateForm = (props) => {
                     />
                 )}
             </Form.Item>
-            <Form.Item>
+            <Form.Item label="Range Time">
                 {getFieldDecorator('rangetime', {
                     rules: [{ required: true, message: 'Please input your Range Time' }],
                 })(
                     <RangePicker prefix={<Icon type="calendar" />} />
                 )}
             </Form.Item>
-            <Form.Item>
+            <Form.Item label="Description">
                 {getFieldDecorator('description', {
                     rules: [{ required: true, message: 'Please input your Desciption' }],
                 })(
@@ -93,15 +99,18 @@ const NormalCreateForm = (props) => {
                     />
                 )}
             </Form.Item>
-            <Form.Item>
-                <Button type="primary" htmlType="submit" className="create-form-button">
-                    Create Task
+            <Col span={8} offset={16}>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" className="create-form-button">
+                        Create Task
                 </Button>
-            </Form.Item>
+                </Form.Item>
+            </Col>
+
         </Form>
     );
 }
 
-const CreateTaskForm1 = Form.create({ name: 'normal_login' })(NormalCreateForm);
+const CreateTaskForm = Form.create({ name: 'normal_login' })(NormalCreateForm);
 
-export default CreateTaskForm1;
+export default CreateTaskForm;

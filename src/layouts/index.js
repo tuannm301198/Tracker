@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Layout, Menu, Icon, DatePicker, Button, Select, Dropdown} from 'antd';
-import CreateTaskForm from '../components/CreateTaskForm/CreateTaskForm'
+import ModalCreateTask from '../components/ModalCreateTask/ModalCreateTask'
 import Link from 'umi/link';
 import styles from './index.css';
 
@@ -147,7 +147,7 @@ const BasicLayout = (props) => {
           </Menu>
         </Sider>
         <Content style={{ margin: '0', background: '#fff', minHeight: 'calc(100vh - 64px)' }}>
-          <CreateTaskForm visible={visible} loading={loading} setVisible={setVisible} setLoading={setLoading} />
+          <ModalCreateTask visible={visible} loading={loading} setVisible={setVisible} setLoading={setLoading} />
           {props.children}
         </Content>
       </Layout>
