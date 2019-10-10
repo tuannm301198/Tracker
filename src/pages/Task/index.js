@@ -1,5 +1,5 @@
 import { Table, Tag } from 'antd';
-import styles from './index.css';
+// import styles from './index.css';
 
 const Task = () => {
   const columns = [
