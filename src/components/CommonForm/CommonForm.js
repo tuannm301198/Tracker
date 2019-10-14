@@ -1,4 +1,4 @@
-import { Form, Icon, Input, Button, Col, Select, DatePicker } from 'antd';
+import { Form, Input, Button, Col, Select, DatePicker } from 'antd';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -38,7 +38,6 @@ const NormalCreateForm = (props) => {
                     rules: [{ required: true, message: 'Please input your name!' }],
                 })(
                     <Input
-                        prefix={<Icon type="user" />}
                         placeholder="Name"
                     />,
                 )}
@@ -56,7 +55,7 @@ const NormalCreateForm = (props) => {
                 {getFieldDecorator('email', {
                     rules: [{ required: true, message: 'Please input your Email' }],
                 })(
-                    <Input prefix={<Icon type="mail" />}
+                    <Input
                         type="email"
                         placeholder="Email"
                     />
@@ -66,7 +65,7 @@ const NormalCreateForm = (props) => {
                 {getFieldDecorator('orderid', {
                     rules: [{ required: true, message: 'Please input your Order ID' }],
                 })(
-                    <Input prefix={<Icon type="mail" />}
+                    <Input 
                         type="text"
                         placeholder="Order ID"
                     />
@@ -76,7 +75,7 @@ const NormalCreateForm = (props) => {
                 {getFieldDecorator('address', {
                     rules: [{ required: true, message: 'Please input your Address' }],
                 })(
-                    <Input prefix={<Icon type="environment" />}
+                    <Input
                         type="text"
                         placeholder="Address"
                     />
@@ -86,20 +85,20 @@ const NormalCreateForm = (props) => {
                 {getFieldDecorator('rangetime', {
                     rules: [{ required: true, message: 'Please input your Range Time' }],
                 })(
-                    <RangePicker prefix={<Icon type="calendar" />} />
+                    <RangePicker />
                 )}
             </Form.Item>
             <Form.Item label="Description">
                 {getFieldDecorator('description', {
                     rules: [{ required: true, message: 'Please input your Desciption' }],
                 })(
-                    <Input prefix={<Icon type="file-text" />}
+                    <Input
                         type="text"
                         placeholder="Description"
                     />
                 )}
             </Form.Item>
-            <Col span={8} offset={16}>
+            <Col span={6} offset={18}>
                 <Form.Item>
                     <Button type="primary" htmlType="submit" className="create-form-button">
                         Create Task
@@ -111,6 +110,6 @@ const NormalCreateForm = (props) => {
     );
 }
 
-const CreateTaskForm = Form.create({ name: 'normal_login' })(NormalCreateForm);
+const CommonForm = Form.create({ name: 'common_form' })(NormalCreateForm);
 
-export default CreateTaskForm;
+export default CommonForm;

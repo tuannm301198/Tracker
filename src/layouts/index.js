@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Layout, Menu, Icon, DatePicker, Button, Select, Dropdown} from 'antd';
-import ModalCreateTask from '../components/ModalCreateTask/ModalCreateTask'
+import { Layout, Menu, Icon, DatePicker, Button, Select, Dropdown, Row, Col } from 'antd';
+import ModalCreateTask from '../components/ModalCreateTask/ModalCreateTask';
 import Link from 'umi/link';
 import styles from './index.css';
 
@@ -10,7 +10,6 @@ const { Option } = Select;
 
 const BasicLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 
   const showModal = () => {
@@ -22,31 +21,47 @@ const BasicLayout = (props) => {
   };
 
   const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
+    {
+      noti: 'Racing car sprays burning fuel into crowd.',
+      date: '24 Aug'
+    },
+    {
+      noti: 'Japanese princess to wed commoner.',
+      date: '22 Aug'
+    },
+    {
+      noti: 'Australian walks 100km after outback crash.',
+      date: '21 Aug'
+    },
+    {
+      noti: 'Man charged over missing wedding girl.',
+      date: '20 Aug'
+    },
+    {
+      noti: 'Los Angeles battles huge wildfires.',
+      date: '19 Aug'
+    },
   ];
 
 
   const notification = (
-    <div>
-      <div style={{backgroundColor:"#eee", padding:7}}><span style={{marginLeft:10}}>Updates</span></div>
-      <Menu>
+    <div style={{ backgroundColor: '#fff' }}>
+      <div style={{ backgroundColor: "#eee", padding: 7 }}><span style={{ marginLeft: 10 }}>Updates</span></div>
       {
         data.map((item, i) => {
           return (
-            <Menu.Item key={i}>
-              <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                <Icon type="info-circle" style={{ color: '#1394ff', marginLeft:10 }} theme="filled" />
-                <span>{item}</span>
-              </a>
-            </Menu.Item>
+            <Row key={i} style={{padding:'10px 0px', borderBottom: '0.5px solid #d9d9d9'}}>
+              <Col span={2} style={{verticalAlign:"middle"}}>
+                <Icon type="info-circle" style={{ color: '#1394ff', marginLeft: 10, verticalAlign:"middle" }} theme="filled" />
+              </Col>
+              <Col span={21} offset={1}>
+                <span style={{ display: 'block' }}>{item.noti}</span>
+                <span style={{ display: 'block', color:'#d9d9d9', fontSize:'10px' }}>{item.date}</span>
+              </Col>
+            </Row>
           )
         })
       }
-    </Menu>
     </div>
   )
 
@@ -67,7 +82,7 @@ const BasicLayout = (props) => {
                 </Link>
               </Button>
               <Button style={{ borderRadius: 0 }}>
-                <Link to="/report/">
+                <Link to="/task/">
                   <Icon type="unordered-list" style={{ marginRight: 2 }} />
                   <span>List</span>
                 </Link>
@@ -147,7 +162,7 @@ const BasicLayout = (props) => {
           </Menu>
         </Sider>
         <Content style={{ margin: '0', background: '#fff', minHeight: 'calc(100vh - 64px)' }}>
-          <ModalCreateTask visible={visible} loading={loading} setVisible={setVisible} setLoading={setLoading} />
+          <ModalCreateTask visible={visible} setVisible={setVisible} />
           {props.children}
         </Content>
       </Layout>

@@ -1,4 +1,4 @@
-import { Tabs, Table } from 'antd';
+import { Tabs, Table, Button, Icon, Input, Row, Col, Divider } from 'antd';
 
 const { TabPane } = Tabs;
 const Staff = () => {
@@ -38,6 +38,12 @@ const Staff = () => {
             key: 'dl',
             dataIndex: 'dl'
         },
+        {
+            title: 'Action',
+            dataIndex: '',
+            key: 'x',
+            render: () => <div><a>Edit</a><Divider type="vertical"/><a>Delete</a></div>
+        }
     ];
 
     const dataEmployees = [
@@ -108,6 +114,12 @@ const Staff = () => {
             key: 'fuel',
             dataIndex: 'fuel'
         },
+        {
+            title: 'Action',
+            dataIndex: '',
+            key: 'x',
+            render: () => <div><a>Edit</a><Divider type="vertical"/><a>Delete</a></div>
+        }
     ];
 
     const dataVehicles = [
@@ -144,23 +156,55 @@ const Staff = () => {
     ];
     const rowSelectionE = {
         onChange: (selectedRowKeys, selectedRows) => {
-          console.log(`selectedRowKeysE: ${selectedRowKeys}`, 'selectedRowsE: ', selectedRows);
+            console.log(`selectedRowKeysE: ${selectedRowKeys}`, 'selectedRowsE: ', selectedRows);
         }
     };
     const rowSelectionV = {
         onChange: (selectedRowKeys, selectedRows) => {
-          console.log(`selectedRowKeysV: ${selectedRowKeys}`, 'selectedRowsV: ', selectedRows);
+            console.log(`selectedRowKeysV: ${selectedRowKeys}`, 'selectedRowsV: ', selectedRows);
         }
     };
     return (
-        <Tabs defaultActiveKey="1">
-            <TabPane tab="Employees" key="1">
-                <Table rowSelection={rowSelectionE} columns={columnEmployees} dataSource={dataEmployees} />
-            </TabPane>
-            <TabPane tab="Vehicles" key="2">
-                <Table rowSelection={rowSelectionV} columns={columnVehicles} dataSource={dataVehicles} />
-            </TabPane>
-        </Tabs>
+        <div style={{margin:'5px'}}>
+            <h2 style={{margin:10}}>Staff Management</h2>
+            <Tabs defaultActiveKey="1">
+                <TabPane tab="Employees" key="1">
+                    <Row>
+                        <Col span={12}>
+                            <Button type="primary" icon="plus" style={{ margin: '10px' }}>
+                                Add Employee
+                            </Button>
+                        </Col>
+                        <Col span={4} offset={7}>
+                            <Input
+                                style={{ margin: '10px' }}
+                                placeholder="Employee Search"
+                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            />
+                        </Col>
+
+                    </Row>
+                    <Table rowSelection={rowSelectionE} columns={columnEmployees} dataSource={dataEmployees} />
+                </TabPane>
+                <TabPane tab="Vehicles" key="2">
+                    <Row>
+                        <Col span={12}>
+                            <Button type="primary" icon="plus" style={{ margin: '10px' }}>
+                                Add Vehicle
+                            </Button>
+                        </Col>
+                        <Col span={4} offset={7}>
+                            <Input
+                                style={{ margin: '10px' }}
+                                placeholder="Vehicle Search"
+                                prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            />
+                        </Col>
+                    </Row>
+                    <Table rowSelection={rowSelectionV} columns={columnVehicles} dataSource={dataVehicles} />
+                </TabPane>
+            </Tabs>
+        </div>
     );
 }
 

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import {  Button, Select, Modal, Collapse } from 'antd';
-import CreateTaskForm from './CreateTaskForm';
+import CommonForm from '../CommonForm/CommonForm'
+import PickupForm from '../PickupForm/PickupForm'
+import DeliveryForm from '../DeliveryForm/DeliveryForm'
 const { Option } = Select;
 const { Panel } = Collapse;
 
@@ -8,8 +10,6 @@ const ModalCreateTask = (props) => {
     const [taskValue, setTaskValue] = useState('fieldworkforce');
     const [addPickup, setAddPickup] = useState(false);
     const [addDelivery, setAddDelivery] = useState(false);
-    const [addAppointment, setAddAppointment] = useState(false);
-    const [addWorkforce, setAddWorkforce] = useState(false);
 
     const { visible, setVisible } = props
 
@@ -32,7 +32,7 @@ const ModalCreateTask = (props) => {
                 (
                     <Collapse>
                         <Panel header="Pickup" key="1">
-                            <CreateTaskForm />
+                            <PickupForm />
                         </Panel>
                     </Collapse>
                 )}
@@ -41,7 +41,7 @@ const ModalCreateTask = (props) => {
                 (
                     <Collapse>
                         <Panel header="Delivery" key="2">
-                            <CreateTaskForm />
+                            <DeliveryForm />
                         </Panel>
                     </Collapse >
                 )}
@@ -52,7 +52,7 @@ const ModalCreateTask = (props) => {
     const appointment = (
         <Collapse>
             <Panel header="Appointment" key="1">
-                <CreateTaskForm />
+                <CommonForm />
             </Panel>
         </Collapse >
     )
@@ -60,7 +60,7 @@ const ModalCreateTask = (props) => {
     const fieldWorkforce = (
         <Collapse>
             <Panel header="Field Workforce" key="1">
-                <CreateTaskForm />
+                <CommonForm />
             </Panel>
         </Collapse >
     )
