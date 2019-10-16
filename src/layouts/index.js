@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Layout, Menu, Icon, DatePicker, Button, Select, Dropdown, Row, Col } from 'antd';
+import { Layout, Menu, Icon, DatePicker, Button, Select, Dropdown, Row, Col, Affix } from 'antd';
 import ModalCreateTask from '../components/ModalCreateTask/ModalCreateTask';
 import Link from 'umi/link';
 import styles from './index.css';
@@ -50,13 +50,13 @@ const BasicLayout = (props) => {
       {
         data.map((item, i) => {
           return (
-            <Row key={i} style={{padding:'10px 0px', borderBottom: '0.5px solid #d9d9d9'}}>
-              <Col span={2} style={{verticalAlign:"middle"}}>
-                <Icon type="info-circle" style={{ color: '#1394ff', marginLeft: 10, verticalAlign:"middle" }} theme="filled" />
+            <Row key={i} style={{ padding: '10px 0px', borderBottom: '0.5px solid #d9d9d9' }}>
+              <Col span={2} style={{ verticalAlign: "middle" }}>
+                <Icon type="info-circle" style={{ color: '#1394ff', marginLeft: 10, verticalAlign: "middle" }} theme="filled" />
               </Col>
               <Col span={21} offset={1}>
                 <span style={{ display: 'block' }}>{item.noti}</span>
-                <span style={{ display: 'block', color:'#d9d9d9', fontSize:'10px' }}>{item.date}</span>
+                <span style={{ display: 'block', color: '#d9d9d9', fontSize: '10px' }}>{item.date}</span>
               </Col>
             </Row>
           )
@@ -67,7 +67,7 @@ const BasicLayout = (props) => {
 
 
   return (
-    <Layout style={{ minHeight: 'calc(100vh - 64px)' }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ padding: 0, backgroundColor: '#000' }} >
         <Link to="/" style={{ marginLeft: '25px', float: 'left' }}>
           <div style={{ width: '140px', textAlign: 'center' }}><h1 style={{ color: '#fff' }}>Track360</h1></div>
@@ -113,7 +113,7 @@ const BasicLayout = (props) => {
           </ul>
         </div>
       </Header>
-      <Layout>
+      <Layout style={{minHeight: 'calc(100vh - 64px)'}}>
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item style={{ marginTop: '0' }} key="1">
@@ -151,9 +151,9 @@ const BasicLayout = (props) => {
                 </span>
               }
             >
-              <Menu.Item key="7">Vehicles</Menu.Item>
-              <Menu.Item key="8">Maintenance</Menu.Item>
-              <Menu.Item key="9">Drives</Menu.Item>
+              <Menu.Item key="7"><Link to="/fleet/vehicles">Vehicles</Link></Menu.Item>
+              <Menu.Item key="8"><Link to="/fleet/drivers">Drivers</Link></Menu.Item>
+              <Menu.Item key="9">Maintenance</Menu.Item>
             </SubMenu>
             <Menu.Item key="10">
               <Icon type="file" />
@@ -161,7 +161,7 @@ const BasicLayout = (props) => {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Content style={{ margin: '0', background: '#fff', minHeight: 'calc(100vh - 64px)' }}>
+        <Content style={{ margin: '0', background: '#fff'}}>
           <ModalCreateTask visible={visible} setVisible={setVisible} />
           {props.children}
         </Content>
