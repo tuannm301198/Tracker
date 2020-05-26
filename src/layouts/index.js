@@ -1,12 +1,44 @@
-import { useState } from 'react';
-import { Layout, Menu, Icon, DatePicker, Button, Select, Dropdown, Row, Col, Affix } from 'antd';
-import ModalCreateTask from '../components/ModalCreateTask/ModalCreateTask';
-import Link from 'umi/link';
+import { useState, useEffect } from 'react';
+import { Layout, Menu, DatePicker, Button, Select, Dropdown, Row, Col } from 'antd';
+import { 
+  EnvironmentOutlined, 
+  AuditOutlined, 
+  GooglePlusOutlined, 
+  UnorderedListOutlined,
+  InfoCircleFilled,
+  BellFilled,
+  LogoutOutlined
+} from '@ant-design/icons';
+import ModalCreateTask from '../components/Modal/ModalCreateTask/ModalCreateTask';
+import { Link, router, Redirect } from 'umi';
 import styles from './index.css';
 
 const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const { Option } = Select;
+
+const data = [
+  {
+    noti: 'Racing car sprays burning fuel into crowd.',
+    date: '24 Aug'
+  },
+  {
+    noti: 'Japanese princess to wed commoner.',
+    date: '22 Aug'
+  },
+  {
+    noti: 'Australian walks 100km after outback crash.',
+    date: '21 Aug'
+  },
+  {
+    noti: 'Man charged over missing wedding girl.',
+    date: '20 Aug'
+  },
+  {
+    noti: 'Los Angeles battles huge wildfires.',
+    date: '19 Aug'
+  },
+];
 
 const BasicLayout = (props) => {
   const [collapsed, setCollapsed] = useState(false);
@@ -20,29 +52,16 @@ const BasicLayout = (props) => {
     setCollapsed(!collapsed);
   };
 
-  const data = [
-    {
-      noti: 'Racing car sprays burning fuel into crowd.',
-      date: '24 Aug'
-    },
-    {
-      noti: 'Japanese princess to wed commoner.',
-      date: '22 Aug'
-    },
-    {
-      noti: 'Australian walks 100km after outback crash.',
-      date: '21 Aug'
-    },
-    {
-      noti: 'Man charged over missing wedding girl.',
-      date: '20 Aug'
-    },
-    {
-      noti: 'Los Angeles battles huge wildfires.',
-      date: '19 Aug'
-    },
-  ];
+  // check login
+  // useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (!user) return <Redirect to="/auth/login" />
+  // }, [])
 
+  const handleClickSignOut = () => {
+    localStorage.removeItem('user');
+    router.push("/auth/login");
+  }
 
   const notification = (
     <div style={{ backgroundColor: '#fff' }}>
@@ -52,7 +71,7 @@ const BasicLayout = (props) => {
           return (
             <Row key={i} style={{ padding: '10px 0px', borderBottom: '0.5px solid #d9d9d9' }}>
               <Col span={2} style={{ verticalAlign: "middle" }}>
-                <Icon type="info-circle" style={{ color: '#1394ff', marginLeft: 10, verticalAlign: "middle" }} theme="filled" />
+                <InfoCircleFilled style={{ color: '#1394ff', marginLeft: 10, verticalAlign: "middle" }}/>
               </Col>
               <Col span={21} offset={1}>
                 <span style={{ display: 'block' }}>{item.noti}</span>
@@ -65,7 +84,6 @@ const BasicLayout = (props) => {
     </div>
   )
 
-
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Header style={{ padding: 0, backgroundColor: '#000' }} >
@@ -77,13 +95,13 @@ const BasicLayout = (props) => {
             <li>
               <Button ghost style={{ borderRadius: 0 }}>
                 <Link to="/">
-                  <Icon type="google-plus" style={{ marginRight: 2 }} />
+                  <GooglePlusOutlined style={{ marginRight: 2 }}/>
                   <span>Map</span>
                 </Link>
               </Button>
               <Button style={{ borderRadius: 0 }}>
                 <Link to="/task/">
-                  <Icon type="unordered-list" style={{ marginRight: 2 }} />
+                  <UnorderedListOutlined style={{ marginRight: 2 }}/>
                   <span>List</span>
                 </Link>
               </Button>
@@ -107,7 +125,7 @@ const BasicLayout = (props) => {
             </li>
             <li>
               <Dropdown overlay={notification} placement="bottomRight" trigger={['click']}>
-                <Icon type="bell" theme="filled" style={{ fontSize: '25px', cursor: 'pointer' }} />
+                <BellFilled style={{ fontSize: '25px', cursor: 'pointer' }}/>
               </Dropdown>
             </li>
           </ul>
@@ -118,13 +136,13 @@ const BasicLayout = (props) => {
           <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
             <Menu.Item style={{ marginTop: '0' }} key="1">
               <Link to="/">
-                <Icon type="pie-chart" />
+                <EnvironmentOutlined />
                 <span>Tracking</span>
               </Link>
             </Menu.Item>
             <Menu.Item key="2">
               <Link to="/report/">
-                <Icon type="desktop" />
+                <AuditOutlined />
                 <span>Report</span>
               </Link>
             </Menu.Item>
@@ -132,7 +150,7 @@ const BasicLayout = (props) => {
               key="sub1"
               title={
                 <span>
-                  <Icon type="user" />
+                  <AuditOutlined />
                   <span>Field service</span>
                 </span>
               }
@@ -146,7 +164,7 @@ const BasicLayout = (props) => {
               key="sub2"
               title={
                 <span>
-                  <Icon type="team" />
+                  <AuditOutlined />
                   <span>Fleet management</span>
                 </span>
               }
@@ -156,8 +174,12 @@ const BasicLayout = (props) => {
               <Menu.Item key="9">Maintenance</Menu.Item>
             </SubMenu>
             <Menu.Item key="10">
-              <Icon type="file" />
+              <AuditOutlined />
               <span>Devices and Settings</span>
+            </Menu.Item>
+            <Menu.Item key="11" onClick={handleClickSignOut}>
+              <LogoutOutlined />
+              <span>Sign out</span>
             </Menu.Item>
           </Menu>
         </Sider>

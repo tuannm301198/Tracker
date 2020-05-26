@@ -1,6 +1,6 @@
 import { Col } from 'antd';
 import { Badge } from 'antd';
-import EmployeeTable from '../../../components/EmployeeTable/EmployeeTable';
+import EmployeeTable from '@/components/Table/EmployeeTable/';
 
 const Drivers = () => {
     return (

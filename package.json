@@ -8,8 +8,11 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "@ant-design/icons": "4.0.0",
+    "antd": "^4.2.4",
     "dva": "^2.6.0-beta.6",
-    "antd": "^3.19.5",
+    "firebase": "^7.14.4",
+    "moment": "^2.26.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
@@ -28,7 +31,10 @@
     "umi-plugin-react": "^1.8.4"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["eslint --fix", "git add"]
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "engines": {
     "node": ">=8.0.0"

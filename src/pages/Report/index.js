@@ -1,11 +1,9 @@
-import styles from './index.css';
+import React from 'react';
+import Map from '@/components/Map';
 
 const Report = () => {
   return (
-    <div>
-      <div className={styles.reportwelcome}/>
-      <h2 style={{textAlign:'center'}}>Welcome to Report</h2>
-    </div>
+    <Map />
   );
 }
 export default Report;

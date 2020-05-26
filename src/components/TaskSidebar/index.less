@@ -1,0 +1,25 @@
+.container {
+  .collapseIcon {
+    position: absolute;
+    top: 0;
+    z-index: 1001;
+    left: 100%;
+    background: #717171;
+    padding: 9.5px;
+    border-radius: 0 0 4px;
+    cursor: pointer;
+  }
+
+  :global {
+    .ant-tabs-bar {
+      margin: 0;
+    }
+  }
+
+  .scrollable {
+    height: calc(100vh - 144px); 
+    overflow-x: hidden; 
+    overflow-x: auto; 
+    text-align:justify; 
+  }
+}

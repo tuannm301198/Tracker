@@ -1,4 +1,4 @@
-import VehiclesTable from '../../../components/VehicleTable/VehicleTable';
+import VehiclesTable from '@/components/Table/VehicleTable';
 import { Col } from 'antd';
 import { Badge } from 'antd';
 
