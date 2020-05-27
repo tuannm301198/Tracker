@@ -2,25 +2,32 @@ import React from 'react';
 import moment from 'moment';
 import { Avatar, Col, Row, Divider } from 'antd';
 
-const TaskItem = ({ task }) => {
+// styles
+import styles from './index.less';
+
+const TaskItem = ({ task, handleShowDetail }) => {
 
   return (
-    <Row style={{ cursor: 'pointer', borderBottom: '1px solid #d9d9d9', padding: '5px 0 10px 0' }}>
-      <Col span={3} offset={2} style={{ paddingTop: 3 }}>
-        <Avatar shape="circle" style={{ backgroundColor: '#3f51b5' }}>
-          U
-        </Avatar>
-        <span style={{ display: 'block' }}>binh</span>
-      </Col>
-      <Col span={1}>
-        <Divider type="vertical" style={{ height: 50 }} />
-      </Col>
-      <Col span={18}>
-        <span style={{ display: 'block', color: '#333', fontWeight: 'bold' }}>{moment(task.pickup.date.seconds).format("YYYY/MM/DD HH:mm")}</span>
-        <span style={{ display: 'block', color: '#333', fontWeight: 'bold' }}>{task.pickup.customer.name}</span>
-        <span>{task.pickup.address.name}</span>
-      </Col>
-    </Row>
+    <React.Fragment>
+      <Row style={{ cursor: 'pointer', borderBottom: '1px solid #d9d9d9', padding: '5px 0 10px 0' }} onClick={handleShowDetail}>
+        <Col span={4} offset={1} style={{ paddingTop: 3 }}>
+          <Avatar shape="circle" style={{ backgroundColor: '#3f51b5' }}>
+            U
+          </Avatar>
+          <span style={{ display: 'block' }}>{task.pickup.customer.name}</span>
+        </Col>
+        <Col span={2} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+          <span className={styles.pickupIcon}>P</span>
+          <Divider type="vertical" style={{ height: 50 }} />
+          <span className={styles.deliveryIcon}>D</span>
+        </Col>
+        <Col span={17}>
+          <span style={{ display: 'block', color: '#333', fontWeight: 'bold' }}>{moment.unix(task.pickup.date.seconds).format("YYYY/MM/DD HH:mm")}</span>
+          <span style={{ display: 'block', color: '#333', fontWeight: 'bold' }}>{task.pickup.customer.name}</span>
+          <span>{task.pickup.address.name}</span>
+        </Col>
+      </Row>
+    </React.Fragment>
   )
 }
 

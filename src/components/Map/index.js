@@ -36,7 +36,6 @@ const Map = () => {
 
   // console.log('map',map)
 
-  console.log('mapref',mapRef)
   // console.log('mapRef', mapRef.current);
   // useEffect(() => {
   //   const interval = setInterval(() => {

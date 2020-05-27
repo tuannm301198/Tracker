@@ -5,19 +5,33 @@ const db = firebase.firestore();
 export const getTask = async () => {
   const data = await db.collection("task").get();
   const response = [];
-      data.forEach(doc => {
-        response.push(doc.data());
+  data.forEach(doc => {
+    response.push({ ...doc.data(), id: doc.id });
   });
+
   return {
     data: response,
     success: true,
   };
 }
 
+export const getTaskDetail = async (id) => {
+  const task = await db.collection("task").doc(id).get();
+  const agent = await db.collection("agent").doc(task.data().agent).get();
+
+  return {
+    data: {
+      task: task.data(),
+      agent: agent.data(),
+    },
+    success: true,
+  };
+}
+
 export const createTask = async (payload) => {
-  console.log('payload', payload);
   const data = await db.collection("task").add({
     agent: payload.agent,
+    date_time: new firebase.firestore.Timestamp(new Date().getTime()/1000, 0),
     delivery: {
       address: {
         latLng: payload.delivery.latLng,
@@ -50,13 +64,8 @@ export const createTask = async (payload) => {
     status: payload.status,
   });
 
-  const response = [];
-      data.forEach(doc => {
-        response.push(doc.data());
-  });
-
   return {
-    data: response,
+    data: data,
     success: true,
   };
 }

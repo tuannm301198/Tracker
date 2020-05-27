@@ -27,8 +27,6 @@ const AgentSidebar = props => {
     setToggleAgent(!collapsedAgent);
   }
 
-  console.log('agentList', agentList);
-
   const renderTabPaneTitle = (quantity, title) => (
     <React.Fragment>
       <span style={{ marginRight: 2 }}>{quantity}</span>

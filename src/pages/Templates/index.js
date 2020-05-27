@@ -2,13 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'dva';
 
 const Templates = props => {
-  const { dispatch, agentList, customerList, managerList, taskList, teamList } = props;
-
-  console.log('agentList', agentList)
-  console.log('customerList', customerList)
-  console.log('managerList', managerList)
-  console.log('taskList', taskList)
-  console.log('teamList', teamList)
+  const { dispatch } = props;
 
   useEffect(() => {
     dispatch({

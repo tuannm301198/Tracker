@@ -6,6 +6,7 @@ import { connect } from 'dva';
 import CommonForm from '../../Form/CommonForm/CommonForm';
 import PickupForm from '../../Form/PickupForm/PickupForm';
 import DeliveryForm from '../../Form/DeliveryForm/DeliveryForm';
+import firebase from 'firebase';
 
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -35,20 +36,20 @@ const ModalCreateTask = props => {
     const createTaskPayload = {
         agent: assign,
         delivery: {
-            latLng: [21.004386, 105.789715],
+            latLng: new firebase.firestore.GeoPoint(21.004386, 105.789715),
             address: deliveryData.address,
             name: deliveryData.name,
             phone: deliveryData.phone,
-            date: moment(deliveryData.date).format('YYYY/MM/DD'),
+            date: new firebase.firestore.Timestamp(moment(deliveryData.date).unix(), 0),
             order_id: deliveryData.order_id,
         },
         order_id: pickupData.order_id,
         pickup: {
-            latLng: [21.004386, 105.789715],
+            latLng: new firebase.firestore.GeoPoint(21.004386, 105.789715),
             address: pickupData.address,
             name: pickupData.name,
             phone: pickupData.phone,
-            date:  moment(pickupData.date).format('YYYY/MM/DD'),
+            date:  new firebase.firestore.Timestamp(moment(pickupData.date).unix(), 0),
             order_id: pickupData.order_id,
         },
         status: assign ? "ASSIGNED" : "UNASSIGNED",
@@ -63,6 +64,8 @@ const ModalCreateTask = props => {
         setTimeout(() => {
             setVisible(false);
             setLoadingModal(false);
+            formDelivery.resetFields();
+            formPickup.resetFields();
         }, 2000);
     }
 

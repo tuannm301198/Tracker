@@ -6,6 +6,7 @@ import { connect } from 'dva';
 
 // components
 import TaskItem from './TaskItem';
+import DetailTask from './DetailTask';
 
 // styles
 import styles from './index.less';
@@ -14,17 +15,30 @@ const { Sider } = Layout;
 const { TabPane } = Tabs;
 
 const TaskSidebar = props => {
-  const { taskList, dispatch } = props;
+  const { taskList, dispatch, createTaskData, taskDetail } = props;
   const [collapsedTask, setToggleTask] = useState(false);
+  const [detailVisible, setDetailVisible] = useState(false);
 
   useEffect(() => {
     dispatch({
       type: 'task/getListTask'
     })
-  }, [dispatch])
+  }, [dispatch, createTaskData]);
 
   const toggleTask = () => {
     setToggleTask(!collapsedTask);
+  };
+
+  const handleCloseDetail = () => {
+    setDetailVisible(false);
+  }
+
+  const handleShowDetail = e => {
+    setDetailVisible(true);
+    dispatch({
+      type: 'task/getDetailTask',
+      payload: e,
+    })
   }
 
   const renderTabPaneTitle = (quantity, title) => (
@@ -37,7 +51,10 @@ const TaskSidebar = props => {
   const renderTaskList = taskList.length && (
     <React.Fragment>
       {taskList.map(item => (
-          <TaskItem task={item}/>
+          <TaskItem 
+            task={item} 
+            handleShowDetail={() => handleShowDetail(item.id)} 
+          />
         )
       )}
     </React.Fragment>
@@ -77,10 +94,18 @@ const TaskSidebar = props => {
           <p style={{ textAlign: "center" }}>No task available for the day</p>
         </TabPane>
       </Tabs>
+        { detailVisible && 
+          <DetailTask 
+            handleCloseDetail={handleCloseDetail}
+            taskDetail={taskDetail}
+          />
+        }
     </Sider>
   )
 }
 
 export default connect(state => ({
-  taskList: state.task.taskList
+  taskList: state.task.taskList,
+  createTaskData: state.task.createTaskData,
+  taskDetail: state.task.taskDetail,
 }))(TaskSidebar);

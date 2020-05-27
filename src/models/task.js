@@ -4,6 +4,7 @@ const TaskModel = {
   namespace: 'task',
   state: {
     taskList: [],
+    taskDetail: {},
     createTaskData: {},
   },
   effects: {
@@ -13,6 +14,16 @@ const TaskModel = {
       if(res.success) {
         yield put({
           type: 'save',
+          payload: res.data,
+        })
+      }
+    },
+    *getDetailTask({ payload }, { call, put }) {
+      const res = yield call(taskServices.getTaskDetail, payload);
+
+      if(res.success) {
+        yield put({
+          type: 'saveDetail',
           payload: res.data,
         })
       }
@@ -31,6 +42,9 @@ const TaskModel = {
   reducers: {
     save: (state, action) => {
       return { ...state, taskList: action.payload };
+    },
+    saveDetail: (state, action) => {
+      return { ...state, taskDetail: action.payload };
     },
     saveCreateData: (state, action) => {
       return { ...state, createTaskData: action.payload };

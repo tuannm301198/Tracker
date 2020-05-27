@@ -10,8 +10,6 @@ const Auth = props => {
     if(user) return <Redirect to="/"/>
   // }, [])
 
-  console.log('aaaaaaaaa')
-
   return (
     <div className={styles.layoutWrapper}>
       <img className={styles.bgImg} src="https://app.tookanapp.com/app/img/signup-bg.svg" alt="bgImg"/>

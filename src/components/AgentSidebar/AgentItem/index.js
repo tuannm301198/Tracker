@@ -6,7 +6,7 @@ const AgentItem = ({ item }) => (
     <Col span={5} offset={1}>
       <Badge dot offset={[-5, 30]} status="success">
         <Avatar shape="circle" style={{ backgroundColor: '#3f51b5' }}>
-          <img src={item.avatar} alt={`img-${item.name}`} />
+          <img src={item.avatar} alt={`img-${item.name}`} style={{ width: 33 }}/>
         </Avatar>
       </Badge>
     </Col>
