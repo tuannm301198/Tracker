@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "tracking360-4328a"
+    "staging": "tracker-1821c",
+    "default": "tracker-1821c"
   }
 }

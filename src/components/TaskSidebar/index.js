@@ -21,8 +21,8 @@ const TaskSidebar = props => {
 
   useEffect(() => {
     dispatch({
-      type: 'task/getListTask'
-    })
+      type: 'task/getListTask',
+    });
   }, [dispatch, createTaskData]);
 
   const toggleTask = () => {
@@ -31,15 +31,15 @@ const TaskSidebar = props => {
 
   const handleCloseDetail = () => {
     setDetailVisible(false);
-  }
+  };
 
   const handleShowDetail = e => {
     setDetailVisible(true);
     dispatch({
       type: 'task/getDetailTask',
       payload: e,
-    })
-  }
+    });
+  };
 
   const renderTabPaneTitle = (quantity, title) => (
     <React.Fragment>
@@ -51,58 +51,50 @@ const TaskSidebar = props => {
   const renderTaskList = taskList.length && (
     <React.Fragment>
       {taskList.map(item => (
-          <TaskItem 
-            task={item} 
-            handleShowDetail={() => handleShowDetail(item.id)} 
-          />
-        )
-      )}
+        <TaskItem task={item} handleShowDetail={() => handleShowDetail(item.id)} />
+      ))}
     </React.Fragment>
-  )
+  );
 
   return (
-    <Sider 
-      trigger={null} 
-      className={styles.container} 
-      collapsible 
-      collapsed={collapsedTask} 
-      collapsedWidth="0" 
-      width="330" 
+    <Sider
+      trigger={null}
+      className={styles.container}
+      collapsible
+      collapsed={collapsedTask}
+      collapsedWidth="0"
+      width="330"
       theme="light"
     >
-      <span 
-        className={styles.collapseIcon}
-        onClick={toggleTask}>
-          {collapsedTask ?
-            <RightOutlined style={{ color: '#fff' }}/> :
-            <LeftOutlined style={{ color: '#fff' }}/>
-          }
+      <span className={styles.collapseIcon} onClick={toggleTask}>
+        {collapsedTask ? (
+          <RightOutlined style={{ color: '#fff' }} />
+        ) : (
+          <LeftOutlined style={{ color: '#fff' }} />
+        )}
       </span>
       <div style={{ background: 'rgb(39, 169, 227)', padding: 5 }}>
-        <Link style={{ color: '#fff', fontSize: 20, marginLeft: 5 }} to="">Task</Link>
+        <Link style={{ color: '#fff', fontSize: 20, marginLeft: 5 }} to="">
+          Task
+        </Link>
       </div>
       <Tabs tabBarGutter={20}>
-        <TabPane tab={renderTabPaneTitle(0, "UNASSIGNED")} key="1">
-          <p style={{ textAlign: "center" }}>No task available for the day</p>
+        <TabPane tab={renderTabPaneTitle(taskList.length, 'ASSIGNED')} key="2">
+          <div className={styles.scrollable}>{renderTaskList}</div>
         </TabPane>
-        <TabPane tab={renderTabPaneTitle(taskList.length, "ASSIGNED")} key="2">
-          <div className={styles.scrollable}>
-            {renderTaskList}
-          </div>
+        <TabPane tab={renderTabPaneTitle(0, 'COMPLETED')} key="3">
+          <p style={{ textAlign: 'center' }}>No task available for the day</p>
         </TabPane>
-        <TabPane tab={renderTabPaneTitle(0, "COMPLETED")} key="3">
-          <p style={{ textAlign: "center" }}>No task available for the day</p>
+        <TabPane tab={renderTabPaneTitle(0, 'FAILED')} key="1">
+          <p style={{ textAlign: 'center' }}>No task available for the day</p>
         </TabPane>
       </Tabs>
-        { detailVisible && 
-          <DetailTask 
-            handleCloseDetail={handleCloseDetail}
-            taskDetail={taskDetail}
-          />
-        }
+      {detailVisible && (
+        <DetailTask handleCloseDetail={handleCloseDetail} taskDetail={taskDetail} />
+      )}
     </Sider>
-  )
-}
+  );
+};
 
 export default connect(state => ({
   taskList: state.task.taskList,

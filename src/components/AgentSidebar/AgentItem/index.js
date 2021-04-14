@@ -1,8 +1,8 @@
 import React from 'react';
 import { Avatar, Col, Row, Badge } from 'antd';
 
-const AgentItem = ({ item }) => (
-  <Row style={{ cursor: 'pointer', borderBottom: '1px solid #d9d9d9', padding: '5px 0 10px 0' }}>
+const AgentItem = ({ item,showModal }) => (
+  <Row style={{ cursor: 'pointer', borderBottom: '1px solid #d9d9d9', padding: '5px 0 10px 0' }} onClick={showModal}>
     <Col span={5} offset={1}>
       <Badge dot offset={[-5, 30]} status="success">
         <Avatar shape="circle" style={{ backgroundColor: '#3f51b5' }}>
