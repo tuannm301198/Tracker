@@ -15,11 +15,10 @@ const Vehicles = () => {
         span={19}
         style={{ margin: '10px 5px 5px 10px', boxShadow: '0 3px 6px rgba(0,0,0,0.3)' }}
       >
-        <DisplayMap />
         <div style={{ backgroundColor: '#002140', padding: 5, width: '100%' }}>
           <h2 style={{ color: '#fff', margin: '0px 0px 0px 10px' }}>Vehicles Management</h2>
         </div>
-        <div>
+        <div style={{ width: '100%' }}>
           <VehiclesTable setVehicleData={e => setVehicleData(e)} />
         </div>
       </Col>
@@ -90,6 +89,12 @@ const Vehicles = () => {
               <Col className={styles.colInfo}>
                 <Text type="secondary">Department</Text>
                 <Text strong>Delivery Department</Text>
+              </Col>
+              <Col className={styles.colInfo}>
+                <Text type="secondary">Recent Event</Text>
+                <Text strong>
+                  Rahul Adenauer: task "Stall Shawarma - 49km MKAD" FAILED! 4 days ago
+                </Text>
               </Col>
             </Col>
           </Row>

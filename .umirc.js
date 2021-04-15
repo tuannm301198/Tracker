@@ -1,8 +1,7 @@
-
 // ref: https://umijs.org/config/
 export default {
   treeShaking: true,
-  
+
   routes: [
     {
       path: '/auth',
@@ -10,13 +9,13 @@ export default {
       routes: [
         {
           path: '/auth/login',
-          component: './Auth/Login'
+          component: './Auth/Login',
         },
         {
           path: '/auth/register',
-          component: './Auth/Register'
+          component: './Auth/Register',
         },
-      ]
+      ],
     },
     {
       path: '/',
@@ -24,65 +23,72 @@ export default {
       routes: [
         {
           path: '/',
-          component: './'
+          component: './',
         },
         {
           path: '/report',
-          component: './Report'
+          component: './Report',
         },
         {
           path: '/task',
-          component: './Task'
+          component: './Task',
         },
         {
           path: '/templates',
-          component: './Templates'
+          component: './Templates',
         },
         {
           path: '/staff',
-          component: './Staff'
+          component: './Staff',
         },
         {
-          path: '/staff',
-          component: './Staff'
+          path: '/device',
+          component: './Device',
         },
         {
           path: '/fleet',
           routes: [
             {
               path: '/fleet/drivers',
-              component: './Fleet/Drivers'
+              component: './Fleet/Drivers',
             },
             {
               path: '/fleet/vehicles',
-              component: './Fleet/Vehicles'
+              component: './Fleet/Vehicles',
             },
-          ]
+            {
+              path: '/fleet/maintenance',
+              component: './Fleet/Maintenance',
+            },
+          ],
         },
-      ]
-    }
+      ],
+    },
   ],
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
-    ['umi-plugin-react', {
-      antd: true,
-      dva: true,
-      dynamicImport: { webpackChunkName: true },
-      title: 'manager_app',
-      dll: true,
-      locale: {
-        enable: true,
-        default: 'en-US',
+    [
+      'umi-plugin-react',
+      {
+        antd: true,
+        dva: true,
+        dynamicImport: { webpackChunkName: true },
+        title: 'manager_app',
+        dll: true,
+        locale: {
+          enable: true,
+          default: 'en-US',
+        },
+        routes: {
+          exclude: [
+            /models\//,
+            /services\//,
+            /model\.(t|j)sx?$/,
+            /service\.(t|j)sx?$/,
+            /components\//,
+          ],
+        },
       },
-      routes: {
-        exclude: [
-          /models\//,
-          /services\//,
-          /model\.(t|j)sx?$/,
-          /service\.(t|j)sx?$/,
-          /components\//,
-        ],
-      },
-    }],
+    ],
   ],
-}
+};

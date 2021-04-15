@@ -8,6 +8,11 @@ import {
   InfoCircleFilled,
   BellFilled,
   LogoutOutlined,
+  CarFilled,
+  ClockCircleFilled,
+  FileFilled,
+  SettingFilled,
+  HddFilled,
 } from '@ant-design/icons';
 import ModalCreateTask from '../components/Modal/ModalCreateTask/ModalCreateTask';
 import { Link, router, Redirect } from 'umi';
@@ -146,17 +151,27 @@ const BasicLayout = props => {
                 <span>Tracking</span>
               </Link>
             </Menu.Item>
-            <Menu.Item key="2">
-              <Link to="/report/">
-                <AuditOutlined />
-                <span>Report</span>
-              </Link>
-            </Menu.Item>
             <SubMenu
               key="sub1"
               title={
                 <span>
-                  <AuditOutlined />
+                  <FileFilled />
+                  <span>Report</span>
+                </span>
+              }
+            >
+              <Menu.Item key="0">
+                <Link to="/report/">Reports</Link>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Link to="/report/">Schedule</Link>
+              </Menu.Item>
+            </SubMenu>
+            <SubMenu
+              key="sub2"
+              title={
+                <span>
+                  <ClockCircleFilled />
                   <span>Field service</span>
                 </span>
               }
@@ -166,32 +181,59 @@ const BasicLayout = props => {
               </Menu.Item>
               {/* <Menu.Item key="4"><Link to="/templates/">Templates</Link></Menu.Item> */}
               {/* <Menu.Item key="5">Form</Menu.Item> */}
+              <Menu.Item key="4">
+                <Link to="/staff/">Recurring Task</Link>
+              </Menu.Item>
+              <Menu.Item key="5">
+                <Link to="/staff/">Forms</Link>
+              </Menu.Item>
               <Menu.Item key="6">
+                <Link to="/staff/">Places</Link>
+              </Menu.Item>
+              <Menu.Item key="7">
                 <Link to="/staff/">Staff</Link>
+              </Menu.Item>
+              <Menu.Item key="8">
+                <Link to="/staff/">Departments</Link>
+              </Menu.Item>
+              <Menu.Item key="9">
+                <Link to="/staff/">Operator</Link>
               </Menu.Item>
             </SubMenu>
             <SubMenu
-              key="sub2"
+              key="sub3"
               title={
                 <span>
-                  <AuditOutlined />
+                  <CarFilled />
                   <span>Fleet management</span>
                 </span>
               }
             >
-              <Menu.Item key="7">
+              <Menu.Item key="10">
                 <Link to="/fleet/vehicles">Vehicles</Link>
               </Menu.Item>
-              <Menu.Item key="8">
+              <Menu.Item key="11">
                 <Link to="/fleet/drivers">Drivers</Link>
               </Menu.Item>
-              <Menu.Item key="9">Maintenance</Menu.Item>
+              <Menu.Item key="12">
+                <Link to="/fleet/maintenance">Driver Journal</Link>
+              </Menu.Item>
+              <Menu.Item key="13">
+                <Link to="/fleet/maintenance">Eco Driving</Link>
+              </Menu.Item>
+              <Menu.Item key="14">
+                <Link to="/fleet/maintenance">Maintenance</Link>
+              </Menu.Item>
             </SubMenu>
-            <Menu.Item key="10">
-              <AuditOutlined />
+            <Menu.Item key="17">
+              <HddFilled />
+              <Link to="/device">Device Management</Link>
+            </Menu.Item>
+            <Menu.Item key="15">
+              <SettingFilled />
               <span>Devices and Settings</span>
             </Menu.Item>
-            <Menu.Item key="11" onClick={handleClickSignOut}>
+            <Menu.Item key="16" onClick={handleClickSignOut}>
               <LogoutOutlined />
               <span>Sign out</span>
             </Menu.Item>

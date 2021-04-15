@@ -1,18 +1,8 @@
 import { useState } from 'react';
 import { Input, Button, Col, Row, Divider, Table, Icon, Badge, Typography, Modal } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
 import ModalAddEmployee from '../../Modal/ModalAddEmployee/ModalAddEmployee';
-import {
-  IdcardFilled,
-  CarFilled,
-  EnvironmentFilled,
-  HomeFilled,
-  PhoneFilled,
-  MailFilled,
-  LockFilled,
-  ToolFilled,
-  EditFilled,
-} from '@ant-design/icons';
+import ModalEditEmployee from '../../Modal/ModalEditEmployee/ModalEditEmployee';
+import { PlusOutlined } from '@ant-design/icons';
 const { Title, Text } = Typography;
 const EmployeeTable = props => {
   const { setUserData } = props;
@@ -92,123 +82,14 @@ const EmployeeTable = props => {
       render: (text, record) => (
         <div>
           <a onClick={showUserModal}>Edit</a>
-          <Modal
-            width="40%"
-            title="Driver"
-            visible={isModalVisible}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
-            <Row gutter={16}>
-              <Col span={12}>
-                <Title level={3}>Summary</Title>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <EditFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Name
-                    </Text>
-                    <Input defaultValue={record.name} />
-                  </Col>
-                </Row>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <CarFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Vehicle
-                    </Text>
-                    <Input defaultValue={record.tracker} />
-                  </Col>
-                </Row>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <HomeFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Department
-                    </Text>
-                    <Input defaultValue="Service Department" />
-                  </Col>
-                </Row>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <IdcardFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Employer ID
-                    </Text>
-                    <Input defaultValue={record.id} />
-                  </Col>
-                </Row>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <LockFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Hardware key
-                    </Text>
-                    <Input defaultValue={record.hardwarekey} />
-                  </Col>
-                </Row>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <ToolFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Driver license number
-                    </Text>
-                    <Input defaultValue={record.dl} />
-                  </Col>
-                </Row>
-              </Col>
-              <Col span={12}>
-                <Title level={3}>Contact Info</Title>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <PhoneFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Phone number
-                    </Text>
-                    <Input defaultValue={record.phone} />
-                  </Col>
-                </Row>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <MailFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Email
-                    </Text>
-                    <Input defaultValue={record.email} />
-                  </Col>
-                </Row>
-                <Row style={{ marginBottom: '10px' }}>
-                  <Col span={3} style={{ alignSelf: 'center' }}>
-                    <EnvironmentFilled style={{ color: '#B8B8B8', fontSize: 24 }} />
-                  </Col>
-                  <Col style={{ display: 'flex', flexDirection: 'column', width: '80%' }}>
-                    <Text type="secondary" style={{ marginBottom: '4px' }}>
-                      Address
-                    </Text>
-                    <Input defaultValue="50170 Kerpen, Germany" />
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Modal>
+
           <Divider type="vertical" />
           <a>Delete</a>
+          <ModalEditEmployee
+            isModalVisible={isModalVisible}
+            handleCancel={handleCancel}
+            handleOk={handleOk}
+          />
         </div>
       ),
     },
