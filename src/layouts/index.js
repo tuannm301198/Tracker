@@ -151,22 +151,12 @@ const BasicLayout = props => {
                 <span>Tracking</span>
               </Link>
             </Menu.Item>
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <FileFilled />
-                  <span>Report</span>
-                </span>
-              }
-            >
-              <Menu.Item key="0">
-                <Link to="/report/">Reports</Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Link to="/report/">Schedule</Link>
-              </Menu.Item>
-            </SubMenu>
+
+            <Menu.Item key="2">
+              <FileFilled />
+              <Link to="/reports/">Reports</Link>
+            </Menu.Item>
+
             <SubMenu
               key="sub2"
               title={
@@ -197,7 +187,7 @@ const BasicLayout = props => {
                 <Link to="/staff/">Departments</Link>
               </Menu.Item>
               <Menu.Item key="9">
-                <Link to="/staff/">Operator</Link>
+                <Link to="/operator/">Operator</Link>
               </Menu.Item>
             </SubMenu>
             <SubMenu
@@ -219,7 +209,7 @@ const BasicLayout = props => {
                 <Link to="/fleet/maintenance">Driver Journal</Link>
               </Menu.Item>
               <Menu.Item key="13">
-                <Link to="/fleet/maintenance">Eco Driving</Link>
+                <Link to="/ecodriving">Eco Driving</Link>
               </Menu.Item>
               <Menu.Item key="14">
                 <Link to="/fleet/maintenance">Maintenance</Link>
@@ -231,7 +221,7 @@ const BasicLayout = props => {
             </Menu.Item>
             <Menu.Item key="15">
               <SettingFilled />
-              <span>Devices and Settings</span>
+              <Link to="/settings">Devices and Settings</Link>
             </Menu.Item>
             <Menu.Item key="16" onClick={handleClickSignOut}>
               <LogoutOutlined />

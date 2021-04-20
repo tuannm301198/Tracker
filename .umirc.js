@@ -26,8 +26,16 @@ export default {
           component: './',
         },
         {
-          path: '/report',
-          component: './Report',
+          path: '/reports',
+          component: './Reports',
+        },
+        {
+          path: '/ecodriving',
+          component: './EcoDriving',
+        },
+        {
+          path: '/settings',
+          component: './Settings',
         },
         {
           path: '/task',
@@ -40,6 +48,10 @@ export default {
         {
           path: '/staff',
           component: './Staff',
+        },
+        {
+          path: '/operator',
+          component: './Operator',
         },
         {
           path: '/device',

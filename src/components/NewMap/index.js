@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { EnvironmentFilled } from '@ant-design/icons';
 export const DisplayMap = props => {
+  const [lat, setLat] = React.useState(21.002508);
+  const [lang, setLang] = React.useState(105.820624);
+  const { map, behavior } = props;
   // Create a reference to the HTML element we want to put the map on
   const mapRef = React.useRef(null);
 
@@ -11,6 +14,7 @@ export const DisplayMap = props => {
    */
   React.useLayoutEffect(() => {
     // `mapRef.current` will be `undefined` when this hook first runs; edge case that
+
     if (!mapRef.current) return;
     const H = window.H;
     const platform = new H.service.Platform({
@@ -73,13 +77,91 @@ export const DisplayMap = props => {
     const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
     const ui = H.ui.UI.createDefault(map, defaultLayers);
+    map.addObject(
+      new H.map.Circle(
+        // The central point of the circle
+        { lat: lat, lng: lang },
+        // The radius of the circle in meters
+        1000,
+        {
+          style: {
+            strokeColor: 'rgba(55, 85, 170, 0.6)', // Color of the perimeter
+            lineWidth: 2,
+            fillColor: 'rgba(0, 128, 0, 0.7)', // Color of the circle
+          },
+        },
+      ),
+    );
+    var marker = new H.map.Marker(
+      { lat: 21.002508, lng: 105.820624 },
+      {
+        // mark the object as volatile for the smooth dragging
+        volatility: true,
+      },
+    );
+    // Ensure that the marker can receive drag events
+    marker.draggable = true;
+    map.addObject(marker);
+
+    // disable the default draggability of the underlying map
+    // and calculate the offset between mouse and target's position
+    // when starting to drag a marker object:
+    map.addEventListener(
+      'dragstart',
+      function(ev) {
+        var target = ev.target,
+          pointer = ev.currentPointer;
+        if (target instanceof H.map.Marker) {
+          var targetPosition = map.geoToScreen(target.getGeometry());
+          target['offset'] = new H.math.Point(
+            pointer.viewportX - targetPosition.x,
+            pointer.viewportY - targetPosition.y,
+          );
+          behavior.disable();
+          console.log(lat);
+        }
+      },
+      false,
+    );
+
+    // re-enable the default draggability of the underlying map
+    // when dragging has completed
+    map.addEventListener(
+      'dragend',
+      function(ev) {
+        var target = ev.target;
+        if (target instanceof H.map.Marker) {
+          behavior.enable();
+        }
+      },
+      false,
+    );
+
+    // Listen to the drag event and move the position of the marker
+    // as necessary
+    map.addEventListener(
+      'drag',
+      function(ev) {
+        var target = ev.target,
+          pointer = ev.currentPointer;
+        if (target instanceof H.map.Marker) {
+          target.setGeometry(
+            map.screenToGeo(
+              pointer.viewportX - target['offset'].x,
+              pointer.viewportY - target['offset'].y,
+            ),
+          );
+        }
+      },
+      false,
+    );
 
     // This will act as a cleanup to run once this hook runs again.
     // This includes when the component un-mounts
     return () => {
       map.dispose();
     };
-  }, [mapRef]); // This will run this hook every time this ref is updated
+  }, [lang, lat, mapRef]); // This will run this hook every time this ref is updated
 
   return <div className="map" ref={mapRef} style={{ height: props.height }} />;
 };
